@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ritual Explorer - Decode the AI x Web3 Future</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00ff9f;
+            --secondary: #0066ff;
+            --accent: #ff00ff;
+            --dark: #0a0a0f;
+            --darker: #050508;
+            --light: #e0e0e0;
+            --glow: rgba(0, 255, 159, 0.3);
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--darker);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 159, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 159, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            animation: gridPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .glow-orb {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            z-index: -1;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            background: var(--primary);
+            top: -200px;
+            right: -200px;
+        }
+
+        .orb-2 {
+            background: var(--secondary);
+            bottom: -200px;
+            left: -200px;
+            animation-delay: -10s;
+        }
+
+        .orb-3 {
+            background: var(--accent);
+            top: 50%;
+            left: 50%;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, -50px) scale(1.1); }
+            66% { transform: translate(-50px, 50px) scale(0.9); }
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 255, 159, 0.2);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px var(--glow);
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGlow 3s ease-in-out infinite;
+            line-height: 1.2;
+        }
+
+        @keyframes textGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px var(--glow)); }
+            50% { filter: drop-shadow(0 0 40px var(--glow)); }
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: rgba(224, 224, 224, 0.8);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab {
+            background: rgba(0, 255, 159, 0.05);
+            border: 1px solid rgba(0, 255, 159, 0.2);
+            color: var(--light);
+            padding: 1rem 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+        }
+
+        .tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--glow), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .tab:hover::before {
+            left: 100%;
+        }
+
+        .tab:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: var(--darker);
+            border-color: var(--primary);
+            box-shadow: 0 0 30px var(--glow);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .arch-card {
+            background: linear-gradient(135deg, rgba(0, 255, 159, 0.05), rgba(0, 102, 255, 0.05));
+            border: 1px solid rgba(0, 255, 159, 0.2);
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .arch-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            border-radius: 8px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.4s ease;
+        }
+
+        .arch-card:hover::before {
+            opacity: 0.3;
+        }
+
+        .arch-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 255, 159, 0.3);
+        }
+
+        .arch-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .arch-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .arch-card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: rgba(224, 224, 224, 0.8);
+        }
+
+        .use-case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .use-case {
+            background: rgba(10, 10, 15, 0.6);
+            border-left: 3px solid var(--primary);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .use-case:hover {
+            background: rgba(0, 255, 159, 0.05);
+            border-left-color: var(--accent);
+            transform: translateX(10px);
+        }
+
+        .use-case h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .code-example {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 159, 0.3);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .code-example::before {
+            content: 'CODE';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--darker);
+            padding: 0 10px;
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        pre {
+            overflow-x: auto;
+            color: var(--primary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 1.5rem;
+            background: rgba(0, 255, 159, 0.05);
+            border: 1px solid rgba(0, 255, 159, 0.2);
+            border-radius: 8px;
+            margin: 0 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            background: rgba(0, 255, 159, 0.1);
+            transform: scale(1.05);
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px var(--glow);
+            z-index: 1;
+        }
+
+        .quiz-section {
+            background: linear-gradient(135deg, rgba(0, 255, 159, 0.05), rgba(255, 0, 255, 0.05));
+            border: 2px solid rgba(0, 255, 159, 0.3);
+            padding: 3rem;
+            border-radius: 12px;
+            margin-top: 3rem;
+        }
+
+        .quiz-question {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .quiz-option {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 159, 0.2);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .quiz-option:hover {
+            background: rgba(0, 255, 159, 0.1);
+            border-color: var(--primary);
+            transform: translateX(10px);
+        }
+
+        .quiz-option.correct {
+            background: rgba(0, 255, 159, 0.2);
+            border-color: var(--primary);
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(255, 0, 0, 0.1);
+            border-color: red;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--darker);
+            padding: 1.2rem 3rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 255, 159, 0.3);
+            margin-top: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 255, 159, 0.5);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 255, 159, 0.05);
+            border: 1px solid rgba(0, 255, 159, 0.2);
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: rgba(224, 224, 224, 0.7);
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: rgba(10, 10, 15, 0.8);
+            border-top: 1px solid rgba(0, 255, 159, 0.2);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .architecture-grid,
+            .use-case-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .timeline-content {
+                margin-left: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+
+    <nav>
+        <div class="nav-content">
+            <div class="logo">RITUAL</div>
+            <div class="nav-links">
+                <a href="#architecture">Architecture</a>
+                <a href="#use-cases">Use Cases</a>
+                <a href="#learn">Learn</a>
+                <a href="#build">Build</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Decode the AI x Web3 Future</h1>
+        <p class="subtitle">
+            Ritual is the world's first sovereign AI execution layer for Web3. Here AI models seamlessly integrate with blockchain - decentralized, verifiable, and censorship-resistant.
+        </p>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">8,000+</span>
+                <span class="stat-label">Infernet Nodes</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">$25M</span>
+                <span class="stat-label">Series A Funding</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">∞</span>
+                <span class="stat-label">Compute Possibilities</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('architecture')">🏗️ Architecture</div>
+            <div class="tab" onclick="switchTab('use-cases')">💡 Use Cases</div>
+            <div class="tab" onclick="switchTab('journey')">🚀 Learning Journey</div>
+            <div class="tab" onclick="switchTab('build')">👨‍💻 Build</div>
+            <div class="tab" onclick="switchTab('quiz')">🎯 Quiz</div>
+        </div>
+
+        <!-- Architecture Tab -->
+        <div id="architecture" class="tab-content active">
+            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2.5rem; margin-bottom: 2rem; color: var(--primary);">
+                Understanding Ritual Architecture
+            </h2>
+            
+            <div class="architecture-grid">
+                <div class="arch-card">
+                    <span class="arch-icon">🔮</span>
+                    <h3>Infernet</h3>
+                    <p>
+                        This is Ritual's core oracle network. Infernet connects off-chain AI computations to on-chain smart contracts. Any EVM-compatible chain can use it - without trusting centralized APIs.
+                    </p>
+                </div>
+
+                <div class="arch-card">
+                    <span class="arch-icon">⛓️</span>
+                    <h3>Ritual Chain</h3>
+                    <p>
+                        A blockchain designed ground-up for AI. Traditional chains cannot run AI models - they're too computationally heavy. Ritual Chain is optimized from day one for AI workloads with heterogeneous compute support.
+                    </p>
+                </div>
+
+                <div class="arch-card">
+                    <span class="arch-icon">🎼</span>
+                    <h3>Symphony Consensus</h3>
+                    <p>
+                        Ritual's unique consensus mechanism. Uses dual proof sharding and distributed verification. Nodes can run on any hardware - CPU, GPU, or TEE, democratizing participation across the network.
+                    </p>
+                </div>
+
+                <div class="arch-card">
+                    <span class="arch-icon">🔐</span>
+                    <h3>ZK Proofs & TEEs</h3>
+                    <p>
+                        For computational integrity and privacy. Zero-knowledge proofs ensure AI outputs are correct without revealing sensitive data. Trusted Execution Environments add an extra security layer for confidential computing.
+                    </p>
+                </div>
+
+                <div class="arch-card">
+                    <span class="arch-icon">🛍️</span>
+                    <h3>Model Marketplace</h3>
+                    <p>
+                        Developers get access to various AI models - LLMs, predictive models, and custom algorithms. Models are treated as digital assets - transparent, tradable, and verifiable on-chain.
+                    </p>
+                </div>
+
+                <div class="arch-card">
+                    <span class="arch-icon">🔌</span>
+                    <h3>Prover Network</h3>
+                    <p>
+                        Ensures computational integrity using ZKPs and TEEs. Whenever an AI task executes, provers verify that computation was performed correctly - making cheating cryptographically impossible.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Use Cases Tab -->
+        <div id="use-cases" class="tab-content">
+            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2.5rem; margin-bottom: 2rem; color: var(--primary);">
+                Real-World Applications
+            </h2>
+            
+            <div class="use-case-grid">
+                <div class="use-case">
+                    <h4>🎮 AI-Powered Gaming</h4>
+                    <p>
+                        NPCs that are actually intelligent, dynamically evolving game worlds, and AI-driven narratives - all on-chain and verifiable for true ownership.
+                    </p>
+                </div>
+
+                <div class="use-case">
+                    <h4>💰 DeFi Intelligence</h4>
+                    <p>
+                        AI-powered risk analysis, predictive market making, automated portfolio management - all transparent and cryptographically verifiable for trustless finance.
+                    </p>
+                </div>
+
+                <div class="use-case">
+                    <h4>🏛️ DAO Governance</h4>
+                    <p>
+                        Intelligent proposal filtering, automated decision-making agents, sentiment analysis - make DAOs smarter with verifiable AI that enhances democratic processes.
+                    </p>
+                </div>
+
+                <div class="use-case">
+                    <h4>🤖 Autonomous Agents</h4>
+                    <p>
+                        AI agents that independently operate on the blockchain - trading, coordination, execution - all cryptographically provable and fully autonomous.
+                    </p>
+                </div>
+
+                <div class="use-case">
+                    <h4>🔍 ZK-Verified Oracles</h4>
+                    <p>
+                        Not just data, but logic-based provable insights. AI model outputs verified with zero-knowledge proofs for maximum trust and transparency.
+                    </p>
+                </div>
+
+                <div class="use-case">
+                    <h4>🏥 Healthcare Privacy</h4>
+                    <p>
+                        Process sensitive medical data with AI while preserving privacy using TEEs and ZK proofs. Patient data never gets exposed while maintaining analytical power.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Journey Tab -->
+        <div id="journey" class="tab-content">
+            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2.5rem; margin-bottom: 2rem; color: var(--primary);">
+                Your Ritual Learning Journey
+            </h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 style="font-family: 'Orbitron', sans-serif; color: var(--primary); margin-bottom: 1rem;">
+                            Level 1: Understand the Problem
+                        </h3>
+                        <p>
+                            Today's Web3 + AI integration is centralized. When you use AI in a blockchain app, you trust external APIs (OpenAI, Google). You don't know what the model is computing, what data is being used, or if results are manipulated. This goes against the core principles of Web3 - trustlessness and verifiability.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 style="font-family: 'Orbitron', sans-serif; color: var(--primary); margin-bottom: 1rem;">
+                            Level 2: Ritual's Solution
+                        </h3>
+                        <p>
+                            Ritual creates a decentralized compute layer where AI models run off-chain but their outputs are cryptographically proven on-chain using zero-knowledge proofs. The trust gap is eliminated - you can verify without revealing data.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 style="font-family: 'Orbitron', sans-serif; color: var(--primary); margin-bottom: 1rem;">
+                            Level 3: Architecture Deep Dive
+                        </h3>
+                        <p>
+                            <strong>Infernet:</strong> Oracle network that connects off-chain AI to on-chain contracts.<br>
+                            <strong>Ritual Chain:</strong> Purpose-built blockchain for heterogeneous AI compute.<br>
+                            <strong>Provers:</strong> Verify computational integrity using ZK and TEE technology.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 style="font-family: 'Orbitron', sans-serif; color: var(--primary); margin-bottom: 1rem;">
+                            Level 4: Technical Concepts
+                        </h3>
+                        <p>
+                            <strong>ZK Proofs:</strong> Proof without revealing data. You can prove computation is correct without showing actual data or process.<br>
+                            <strong>TEEs:</strong> Trusted Execution Environments - hardware-level security for sensitive computations.<br>
+                            <strong>Heterogeneous Compute:</strong> Different hardware (CPU, GPU, TPU) work together seamlessly.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 style="font-family: 'Orbitron', sans-serif; color: var(--primary); margin-bottom: 1rem;">
+                            Level 5: Start Building!
+                        </h3>
+                        <p>
+                            Now you're ready to build on Ritual. Use the Infernet SDK, integrate AI models into smart contracts, and create decentralized AI-powered dApps. The future is yours to build!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Build Tab -->
+        <div id="build" class="tab-content">
+            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2.5rem; margin-bottom: 2rem; color: var(--primary);">
+                Start Building with Ritual
+            </h2>
+            
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                AI integration with Ritual is very simple. Here's how you can add AI to your smart contracts:
+            </p>
+
+            <div class="code-example">
+                <pre>
+// Calling an AI model using Infernet SDK
+
+import { Ritual } from '@ritual/sdk';
+
+// Initialize Ritual client
+const ritual = new Ritual({
+  apiKey: process.env.RITUAL_API_KEY,
+  network: 'mainnet'
+});
+
+// Query the AI model
+const response = await ritual.useInference({
+  model: 'LLAMA2-30B',
+  prompt: 'Analyze this DeFi protocol risk',
+  parameters: {
+    temperature: 0.7,
+    maxTokens: 500
+  }
+});
+
+// Response is on-chain verified with ZK proof
+console.log(response.output);
+console.log(response.proof); // ZK proof of computation
+                </pre>
+            </div>
+
+            <div class="code-example">
+                <pre>
+// AI integration in Smart Contract (Solidity)
+
+pragma solidity ^0.8.0;
+
+import "@ritual/contracts/IInfernet.sol";
+
+contract AIDataAnalyzer {
+    IInfernet public infernet;
+    
+    function analyzeData(string memory data) public returns (bytes32) {
+        // Request AI computation
+        bytes32 requestId = infernet.requestCompute(
+            "LLAMA2-30B",
+            abi.encode(data),
+            address(this)
+        );
+        
+        return requestId;
+    }
+    
+    // Callback function - Infernet calls this with result
+    function infernetCallback(
+        bytes32 requestId,
+        bytes memory output,
+        bytes memory proof
+    ) external {
+        // Verify ZK proof
+        require(infernet.verifyProof(proof), "Invalid proof");
+        
+        // Process AI output on-chain
+        // Your logic here...
+    }
+}
+                </pre>
+            </div>
+
+            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--primary); margin-top: 3rem; margin-bottom: 1.5rem; font-size: 1.8rem;">
+                Developer Resources
+            </h3>
+            
+            <div class="use-case-grid">
+                <div class="use-case">
+                    <h4>📚 Documentation</h4>
+                    <p>
+                        Complete guides, API references, and tutorials at ritualfoundation.org/docs
+                    </p>
+                </div>
+
+                <div class="use-case">
+                    <h4>🛠️ Infernet SDK</h4>
+                    <p>
+                        Developer-friendly toolkit with support for scikit-learn, HuggingFace, PyTorch
+                    </p>
+                </div>
+
+                <div class="use-case">
+                    <h4>💻 GitHub</h4>
+                    <p>
+                        Open-source code examples, templates, aur reference implementations
+                    </p>
+                </div>
+
+                <div class="use-case">
+                    <h4>👥 Community</h4>
+                    <p>
+                        Join Discord and Twitter - connect with fellow builders and developers
+                    </p>
+                </div>
+            </div>
+
+            <a href="https://ritual.net" target="_blank" class="cta-button">Start Building on Ritual →</a>
+        </div>
+
+        <!-- Quiz Tab -->
+        <div id="quiz" class="tab-content">
+            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2.5rem; margin-bottom: 2rem; color: var(--primary);">
+                Test Your Knowledge
+            </h2>
+            
+            <div class="quiz-section">
+                <div class="quiz-question">Q1: What is Ritual's main purpose?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        A) To create another NFT marketplace
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">
+                        B) To integrate AI models with blockchain in a decentralized and verifiable way
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        C) A cryptocurrency trading platform
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        D) A social media dApp
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-section">
+                <div class="quiz-question">Q2: What does Infernet do?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">
+                        A) Connects off-chain AI computations to on-chain smart contracts
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        B) Increases internet speed
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        C) A gaming platform
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        D) A video streaming service
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-section">
+                <div class="quiz-question">Q3: What is the main benefit of ZK Proofs?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        A) They increase transaction speed
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">
+                        B) They prove computation correctness without revealing sensitive data
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        C) They reduce gas fees
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        D) They mine tokens
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-section">
+                <div class="quiz-question">Q4: What is Ritual Chain optimized for?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        A) Fast token transfers
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        B) NFT minting
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">
+                        C) Heterogeneous AI compute workloads
+                    </div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">
+                        D) Social networking
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p style="font-family: 'Orbitron', sans-serif; font-size: 1.2rem; margin-bottom: 1rem;">
+                Build the Future of AI x Web3
+            </p>
+            <p style="color: rgba(224, 224, 224, 0.6);">
+                Ritual - Making Smart Contracts Actually Smart
+            </p>
+            <div class="social-links">
+                <a href="https://twitter.com/ritualnet" target="_blank">🐦 Twitter</a>
+                <a href="https://discord.gg/ritual" target="_blank">💬 Discord</a>
+                <a href="https://github.com/ritual-net" target="_blank">💻 GitHub</a>
+                <a href="https://ritual.net" target="_blank">🌐 Website</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tabName) {
+            // Remove active class from all tabs and contents
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked tab and corresponding content
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        function checkAnswer(element, isCorrect) {
+            // Remove previous states
+            element.parentElement.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('correct', 'incorrect');
+            });
+            
+            // Add appropriate class
+            if (isCorrect) {
+                element.classList.add('correct');
+                setTimeout(() => {
+                    alert('🎉 Correct answer! Excellent!');
+                }, 200);
+            } else {
+                element.classList.add('incorrect');
+                setTimeout(() => {
+                    alert('❌ Wrong! Try again!');
+                }, 200);
+            }
+        }
+
+        // Add scroll-based animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.arch-card, .use-case, .timeline-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
